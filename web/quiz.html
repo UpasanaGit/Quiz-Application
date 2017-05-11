@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<head>
+    <meta charset="UTF-8" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+    <title>Quiz Form </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+    <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="../favicon.ico"> 
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+
+
+    <style>
+        .selector
+        {
+            width:75%;
+            background-color: rgb(213, 227, 229);
+            border: 1px solid #ccc;
+            height:30px;
+            color: #1d3c41;
+            font-weight: bold;
+            font-size:20px;
+        }
+        table{
+            width:100%;
+            cellpadding:10;
+        }
+        td
+        {
+            width:25%;
+            text-align: left;
+            padding-left: 30px;
+            padding-top: 10px;
+            padding-bottom: 5px;
+        }
+        .tdList{
+            display:list-item;
+            list-style:decimal inside;
+
+        }
+        .isCorrect_true{
+            background-color: lightgreen;
+        }
+
+        .isCorrect_false{
+            background-color: lightcoral;
+        }
+
+        #timer{
+            text-align:right;
+            color:rgba(26,89,120,0.9);
+            font-weight:bold; 
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" ng-controller="quizcontroller">
+        <div id="container_demo" >
+            <h1>{{userName}}</h1>
+            <h1 style="text-align: center;">{{testName}}</h1>
+            <h1 style="text-align: right;">Test Id:  {{testId}} </h1>
+            <div id="timer"></div>
+            <div id="wrapper">
+                <form ng-show="selectCategory">
+                    <h1>Select the category to start the Quiz:</h1>
+                    <br/>
+                    <center>
+                        <select id="categories" ng-model="categories" class="selector">
+                            <option value="">Select</option>
+                            <option value="JAVA">JAVA</option>
+                            <option value="CSS">CSS</option>
+                            <option value="JAVASCRIPT">JAVASCRIPT</option>
+                            <option value="HTML">HTML</option>
+                        </select>
+                    </center>
+                    <br/>
+                    <p class="button" style="margin-left: 25%; margin-top:30%;"> 
+                        <input type="button" ng-click="getQuestions()" value="Start"/>
+                    </p>
+                    <p>{{err}}</p>
+                </form>
+                <form ng-show="quizForm" style="width:160%; margin-left:-20%;" id="quizform">
+                    <div ng-repeat="items in data" style="background-color: rgb(247, 247, 247); width:100%;" id="quizform_div" class="tdList">
+                        <table id="{{$index+1}}">
+                            <tbody>
+                                <tr>
+                                    <td id="question_{{$index+1}}" colspan="2" >{{items.question}}</td>
+                                </tr>
+                                <tr> 
+                                    <td id="A_{{$index+1}}"><input type="radio" ng-value="'A'" id="A_{{$index+1}}" name="answer_{{$index+1}}" ng-disabled="done"/>
+                                        {{items.option1}}
+                                    </td>
+                                    <td id="B_{{$index+1}}"> <input type="radio" ng-value="'B'" id="B_{{$index+1}}" name="answer_{{$index+1}}" ng-disabled="done"/>
+                                        {{items.option2}}
+                                    </td>
+                                </tr>
+                                <tr> 
+                                    <td id="C_{{$index+1}}"> <input type="radio" ng-value="'C'" id="C_{{$index+1}}" name="answer_{{$index+1}}" ng-disabled="done"/>
+                                        {{items.option3}}
+                                    </td>
+                                    <td id="D_{{$index+1}}"> <input type="radio" ng-value="'D'" id="D_{{$index+1}}" name="answer_{{$index+1}}" ng-disabled="done"/>
+                                        {{items.option4}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br/><br/><br/><br/>
+                    <p class="button">
+                        <input type="button" ng-disabled="testSubmit" ng-click="quizSubmit()" value="Submit" style="width:15%;float: right;"/>
+                    </p>
+                    <p class="button">
+                        <input type="button" ng-show="printCerti" ng-click="printCertificate()" value="Certificate" style="width:15%;float: left;"/>
+                    </p>
+                </form>
+            </div>
+        </div> 
+    </div> 
+</body>
+

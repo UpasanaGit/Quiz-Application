@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="myApp">
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/loader.js"></script>
+
+    <style>
+        .anchor{
+            color: rgba(26,89,120,0.9);
+            font-size: larger;
+            margin-left: 10px;
+            margin-top : 5px;
+            font-weight: bold;
+        }
+        input[type=search]{
+            border:1px solid #fafafa;
+            -webkit-box-shadow:0 0 6px #007eff;
+            -moz-box-shadow:0 0 5px #007eff;
+            box-shadow:0 0 5px #007eff;
+            font-size: 18px;
+            width: 80%;
+        }
+        input[type=button]{
+            width: 90%;
+            cursor: pointer;	
+            background: rgb(61, 157, 179);
+            padding: -3px -2px;
+            font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
+            color: #fff;
+            font-size: 18px;	
+            border: 1px solid rgb(28, 108, 122);	
+            margin-bottom: 10px;	
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;	
+            -webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+                0px 0px 0px 3px rgb(254, 254, 254),
+                0px 5px 3px 3px rgb(210, 210, 210);
+            -moz-box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+                0px 0px 0px 3px rgb(254, 254, 254),
+                0px 5px 3px 3px rgb(210, 210, 210);
+            box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+                0px 0px 0px 3px rgb(254, 254, 254),
+                0px 5px 3px 3px rgb(210, 210, 210);
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+        #container{width:100%;}
+        #left{float:left;width:25%;height:570px;}
+        #right{float:left;width:25%;height:570px;}
+        #center{float:left;width:48%;height:570px;}
+    </style>
+    <body style='background-image: url("images/bg.jpg"); background-size: cover;' onload="getTopperList()">
+        <div style="background-color: rgb(247, 247, 247);height:44px;margin-top:15px;">
+            <a href="#" class="anchor">Home</a>
+            <a href="#signup" class="anchor">SignUp</a>
+            <a href="#login" class="anchor">LogIn</a>
+            <a href="#quiz" class="anchor">Quiz</a>
+            <a href="#logout" class="anchor" style="float: right" ng-show="true">LogOut</a>
+        </div>
+        <br/>
+        <div ng-model="mainDiv" id="container">
+            <div ng-model="leftDiv" id="left"  style="background-color: whitesmoke; margin-top:20px;opacity:0.6;">
+
+            </div>
+            <div ng-model="centerDiv" id="center" style="margin-top:20px;margin-left: 10px;">
+                <div id="pie_chart" style="opacity:0.8"></div>
+            </div>
+            <div ng-model="rightDiv" id="right" style="background-color: whitesmoke;opacity:0.6;margin-top:20px;">
+                <table  class="tdList" style="width:100%; background-color: rgb(247, 247, 247); ">
+                    <tbody>
+                        <tr>
+                            <td style="width:75%;"><input type="search" id="search"></td>
+                            <td style="width:25%;"><input type="button" value="search" onclick="searchList()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div ng-view></div>
+    </body>
+</html>
